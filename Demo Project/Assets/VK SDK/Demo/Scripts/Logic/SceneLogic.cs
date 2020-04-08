@@ -14,8 +14,8 @@ using VK.SDK;
 //
 //  @name           VK Standalone SDK
 //  @developer      Ocugine Games
-//  @version        0.4.2
-//  @build          402
+//  @version        0.4.3
+//  @build          403
 //  @url            https://vk.com/ocugine
 //  @license        MIT
 //===================================================
@@ -63,9 +63,6 @@ public class SceneLogic : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
-        // Add Handlers
-        VK.OnAuthenticationComplete += CompleteAuthentication;
-
         // Work With Game UI
         _HideAllGamePanels(); // Hide All Game Panels
 
@@ -79,7 +76,10 @@ public class SceneLogic : MonoBehaviour{
 
     // Authenticate
     public void Authenticate(){
-        VK.ShowLoginWindow(); // Authenticate
+        // Authenticate
+        VK.Auth(CompleteAuthentication, (BaseErrorModel e)=> {
+            if (VK.settings.debug_mode) Debug.Log(e.error_msg);
+        });
     }
     private void CompleteAuthentication(string access_token){
         Debug.Log("VK API Access Token: " + access_token);
@@ -97,7 +97,7 @@ public class SceneLogic : MonoBehaviour{
             _loadProfile(profile);
             GameMenu.SetActive(true);
         }, (BaseErrorModel error) => { // Error
-            Debug.Log("VK API Error: " + error.error_msg);
+            if (VK.settings.debug_mode) Debug.Log("VK API Error: " + error.error_msg);
         });
     }
     private void _loadProfile(ProfileResponse profile){
@@ -127,9 +127,9 @@ public class SceneLogic : MonoBehaviour{
         WWWForm _data = new WWWForm();
         _data.AddField("message", "Я набрал максимальный счет в игре "+Application.productName+" в размере "+current_scores+" очков!");
         VK.Call("wall.post", _data, (string data) => { // OK
-            Debug.Log("Запись вконтакте успешно размещена!");
+            if (VK.settings.debug_mode) Debug.Log("Запись вконтакте успешно размещена!");
         }, (BaseErrorModel error) => { // Error
-            Debug.Log("VK API Error: " + error.error_msg);
+            if (VK.settings.debug_mode) Debug.Log("VK API Error: " + error.error_msg);
         });
     }
 
@@ -148,9 +148,9 @@ public class SceneLogic : MonoBehaviour{
 
         // Call VK API Method
         VK.Call("wall.get", _data, (string data) => { // OK
-            Debug.Log(data); // Returns string with JSON response
+            if (VK.settings.debug_mode) Debug.Log(data); // Returns string with JSON response
         }, (BaseErrorModel error) => { // Error
-            Debug.Log("VK API Error: " + error.error_msg); // Returns Error Message
+            if (VK.settings.debug_mode) Debug.Log("VK API Error: " + error.error_msg); // Returns Error Message
         });
     }
 }

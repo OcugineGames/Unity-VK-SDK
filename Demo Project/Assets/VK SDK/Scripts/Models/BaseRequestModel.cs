@@ -27,7 +27,6 @@ public class BaseRequestModel{
 
 [System.Serializable]
 public class BaseResponseModel{
-    /* Empty Model */
 }
 
 [System.Serializable]

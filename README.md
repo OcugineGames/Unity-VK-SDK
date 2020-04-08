@@ -8,9 +8,6 @@
 - Windows 7 и выше (x86 и x64);
 - MacOS X;
 
-## Используемые компоненты
-Для организации работы **WebView** в авторизации используется (https://github.com/gree/unity-webview) для **Mac** и WWebView (https://github.com/icodes-studio/WWebView) для **Windows**.
-
 ## Документация
 **Изучить документацию можно в онлайн-режиме здесь:**<br/>
 https://docs.google.com/document/d/1XMXO8-cD01yuBs8wKCgJp6IEo4Nwx3st5vHhUc-QsQ8/edit?usp=sharing
