@@ -13,10 +13,10 @@ using VK.SDK;
 //  Unity
 //
 //  @name           VK Standalone SDK
-//  @developer      Ocugine Games
+//  @developer      VK
 //  @version        0.4.3
 //  @build          403
-//  @url            https://vk.com/ocugine
+//  @url            https://vk.com/dev
 //  @license        MIT
 //===================================================
 //===================================================
